@@ -9,7 +9,7 @@ from PyQt5.QtMultimedia import QSound
 import cv2
 from ultralytics import YOLO
 import torch
-import mysql.connector
+import mysql.connector  
 from mysql.connector import errorcode
 import rk_mcprotocol as mc
 import time
@@ -68,7 +68,8 @@ class DetectionThread(QThread):
                 
             self.log_signal.emit("Loading YOLO model...", "info")
             model = YOLO("yolov8training/exp1/weights/best.pt")
-            model.to("cuda" if torch.cuda.is_available() else "cpu")
+            # model.to("cuda" if torch.cuda.is_available() else "cpu")
+            model.to('cpu')
 
             self.log_signal.emit("Starting detection...", "info")
             cap = cv2.VideoCapture(CAMERA_IND)
